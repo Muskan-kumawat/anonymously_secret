@@ -75,7 +75,15 @@ app.post("/login",async function(req, res){
   
 app.post("/submit", (req, res) => {
     newSecret = req.body.secret;
-    res.render("secrets",{secret: newSecret});
+    // res.render("secrets",{secret: newSecret});
+    try{
+        await item.findByIdAndUpdate({_id: '68010f6ee50ab3a13196597a'}, { secrets: newSecret },{ new: true } );
+    
+        res.render("secrets",{secret: newSecret});
+    }
+    catch(err){
+        console.log(err);
+    }
     
 });
 
