@@ -4,6 +4,9 @@ const encrypt = require('mongoose-encryption');
 const ejs = require('ejs');
 const mongoose = require('mongoose');
 
+const dotenv = require('dotenv');
+dotenv.config({});
+
 var app = express();
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({extended: true}));
@@ -11,7 +14,12 @@ app.use(express.static('public'));
 
 
 
-mongoose.connect("mongodb://localhost:27017/secrets");
+// mongoose.connect("mongodb://localhost:27017/secrets");
+mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  });
+
 const trySchema = new mongoose.Schema({
     email : String,
     password : String,
