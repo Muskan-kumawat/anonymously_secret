@@ -78,7 +78,7 @@ app.post("/submit", (req, res) => {
     const input = new item({
         secrets : newSecret
     });
-    await input.save();
+    input.save();
     res.render("secrets",{secret: newSecret});
     // try{
     //     await item.findByIdAndUpdate({_id: '68010f6ee50ab3a13196597a'}, { secrets: newSecret },{ new: true } );
